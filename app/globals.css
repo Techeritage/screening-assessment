@@ -2,20 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
+  * {
+    @apply m-0 p-0 box-border;
+  }
+  h1 {
+    @apply text-4xl sm:text-5xl md:text-6xl font-bold;
+  }
+  h2 {
+    @apply text-3xl font-satoBold;
+  }
+  h3 {
+    @apply text-2xl sm:text-3xl md:text-4xl font-medium;
+  }
+  h4 {
+    @apply text-xl font-satoBold;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  th {
+    @apply font-normal
+  }
+
+  /* input {
+    @apply placeholder:text-black/90 focus:outline-none focus:border-primary !h-[56px] border border-gray-400;
+  } */
+
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    box-shadow: 0 0 0 1000px transparent inset !important;
+    transition: background-color 5000s ease-in-out 0s;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .myFlex {
+    @apply flex items-center;
+  }
+
+  .pageContainer {
+    @apply bg-primary-50 min-h-dvh ml-[230px] mt-[48px] px-7 py-3;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
