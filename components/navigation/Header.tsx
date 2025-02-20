@@ -12,7 +12,7 @@ const Header = () => {
     .find((link) => link.navLink === pathname);
 
   return (
-    <div className="fixed top-0 right-0 h-[48px] left-[230px] flex items-center px-5 bg-white justify-between border-b border-myGray">
+    <div className="fixed top-0 right-0 h-[48px] z-[1000] left-[230px] flex items-center px-5 bg-white justify-between border-b border-myGray">
       <div className="flex gap-3 w-fit">
         {activeLink ? (
           <>

@@ -1,42 +1,18 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
+import { cardRequests } from "@/constants";
 
-const cardRequests = [
-  {
-    branch: "Corporate",
-    cardType: "Instant",
-    quantity: 10,
-    status: "Ready",
-  },
-  {
-    branch: "Corporate",
-    cardType: "Personalized",
-    quantity: 10,
-    status: "In Progress",
-  },
-  {
-    branch: "Corporate",
-    cardType: "Personalized",
-    quantity: 10,
-    status: "Acknowledged",
-  },
-  {
-    branch: "Corporate",
-    cardType: "Instant",
-    quantity: 10,
-    status: "Pending",
-  },
-];
+import Link from "next/link";
 
-const statusColors = {
+export const statusColors = {
   Ready: "bg-[#ECFDF3] text-[#067647] border-[#ABEFC6]",
   "In Progress": "bg-[#FFFAEB] text-[#B54708] border-[#FEDF89]",
   Acknowledged: "bg-[#EFF8FF] text-[#175CD3] border-[#B2DDFF]",
   Pending: "bg-[#F9FAFB] text-[#344054] border-[#EAECF0]",
 } as const;
 
-const getStatusColor = (status: keyof typeof statusColors) =>
+export const getStatusColor = (status: keyof typeof statusColors) =>
   statusColors[status];
 
 const CardRequestsTable = () => {
@@ -72,8 +48,13 @@ const CardRequestsTable = () => {
                     {request.status}
                   </Badge>
                 </td>
-                <td className="px-4 py-2 text-primary-200 font-satoBold cursor-pointer">
-                  View
+                <td className="px-4 py-2 text-primary-200 font-satoBold">
+                  <Link
+                    href={`/card-request/${request.id}`}
+                    className="hover:underline"
+                  >
+                    View
+                  </Link>
                 </td>
               </tr>
             ))}

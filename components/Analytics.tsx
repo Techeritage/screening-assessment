@@ -1,5 +1,4 @@
 import { AnalyticsStat } from "@/constants";
-import React from "react";
 import AnalyticsCard from "./Cards/AnalyticsCard";
 
 const Analytics = () => {

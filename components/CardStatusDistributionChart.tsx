@@ -35,7 +35,7 @@ const CardStatusChart = () => {
             avoidLabelOverlap: false,
             padAngle: 2,
             itemStyle: {
-              borderRadius: 4,
+              borderRadius: 10,
             },
             label: {
               show: false,
