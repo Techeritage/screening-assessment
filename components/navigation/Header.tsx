@@ -1,19 +1,26 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { sideNavLinks } from "@/constants/SideNavLinks";
-import { ChevronRight, ChevronLeft } from "lucide-react";
+import { ChevronRight, ChevronLeft, Bell, User } from "lucide-react";
+import React from "react";
+import { Home2, SearchNormal1 } from "iconsax-react";
 
 const Header = () => {
   const pathname = usePathname();
   const router = useRouter();
   const pathSegments = pathname.split("/").filter(Boolean);
 
-  const baseRoute =
+  const baseRoute:
+    | {
+        navTitle: string;
+        navLink: string;
+        icon: React.JSX.Element;
+      }
+    | undefined =
     pathname === "/"
-      ? { navTitle: "Dashboard", navLink: "/", icon: "/icons/dashboard.svg" }
+      ? { navTitle: "Dashboard", navLink: "/", icon: <Home2 /> }
       : sideNavLinks
           .flatMap((group) => group.links)
           .find((link) => {
@@ -45,22 +52,21 @@ const Header = () => {
             <span>Back</span>
           </button>
         )}
-
         {baseRoute && (
           <div className="flex items-center gap-3">
-            <Image
-              src={baseRoute.icon}
-              alt={baseRoute.navTitle}
-              width={20}
-              height={20}
-            />
+            {React.cloneElement(baseRoute.icon, {
+              size: 20,
+              color: "#001735",
+              className: "transition-colors duration-200",
+            })}
+
             {isDynamicRoute && (
               <ChevronRight className="w-5 h-5 text-myGray-300" />
             )}
             <div className="flex items-center gap-3">
               <Link
                 href={baseRoute.navLink}
-                className="text-[#475467] font-satoMd hover:text-gray-800"
+                className="text-[#001735] font-satoMd hover:text-gray-800"
               >
                 {baseRoute.navTitle}
               </Link>
@@ -81,12 +87,7 @@ const Header = () => {
       <div className="myFlex gap-4">
         {!isDynamicRoute && (
           <div className="border border-myGray-100 rounded-full h-[32px] px-3 w-[214px] myFlex gap-3">
-            <Image
-              src="/icons/search.svg"
-              alt="search icon"
-              width={16}
-              height={16}
-            />
+            <SearchNormal1 size="16" color="#344054" />
             <input
               type="text"
               className="focus:outline-none w-full placeholder:text-sm placeholder:text-myGray-400"
@@ -96,15 +97,10 @@ const Header = () => {
         )}
 
         <div className="p-3 rounded-full">
-          <Image src="/icons/bell.svg" alt="bell icon" width={20} height={20} />
+          <Bell size="20" color="#475467" />
         </div>
         <div className="p-2 rounded-full bg-myGray-50 border border-myGray">
-          <Image
-            src="/icons/user2.svg"
-            alt="user icon"
-            width={16}
-            height={16}
-          />
+          <User size="16" color="#475467" />
         </div>
       </div>
     </div>

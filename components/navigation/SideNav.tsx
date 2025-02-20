@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import React, { useState } from "react";
 
 const SideNav = () => {
   const pathName = usePathname();
@@ -45,26 +46,36 @@ const SideNav = () => {
                 </p>
               )}
               <ul className="grid gap-1">
-                {nav.links.map((link, i) => (
-                  <li
-                    key={i}
-                    className={cn(
-                      "p-3 text-myGray-100 rounded-lg transition-all duration-200 flex items-center gap-3 hover:bg-primary-100 hover:text-primary-200",
-                      isActiveLink(link.navLink) &&
-                        "bg-primary-100 text-primary-200 font-satoMd"
-                    )}
-                  >
-                    <Link href={link.navLink} className="flex gap-3 w-full">
-                      <Image
-                        src={link.icon}
-                        width={18}
-                        height={18}
-                        alt="icon"
-                      />
-                      <span>{link.navTitle}</span>
-                    </Link>
-                  </li>
-                ))}
+                {nav.links.map((link, i) => {
+                  const [isHovered, setIsHovered] = useState(false);
+                  const iconColor = isHovered
+                    ? "#014DAF"
+                    : isActiveLink(link.navLink)
+                    ? "#014DAF"
+                    : "#D0D5DD";
+                  return (
+                    <li
+                      key={i}
+                      className={cn(
+                        "p-3 text-myGray-100 group rounded-lg transition-all duration-200 flex items-center gap-3 hover:bg-primary-100 hover:text-primary-200",
+                        isActiveLink(link.navLink) &&
+                          "bg-primary-100 text-primary-200 font-satoMd"
+                      )}
+                      onMouseEnter={() => setIsHovered(true)}
+                      onMouseLeave={() => setIsHovered(false)}
+                    >
+                      <Link href={link.navLink} className="flex gap-3 w-full">
+                        {link.icon &&
+                          React.cloneElement(link.icon, {
+                            size: 20,
+                            color: iconColor,
+                            className: "transition-colors duration-200",
+                          })}
+                        <span>{link.navTitle}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
