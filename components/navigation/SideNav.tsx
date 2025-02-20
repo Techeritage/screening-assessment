@@ -24,7 +24,7 @@ const SideNav = () => {
   };
 
   return (
-    <aside className="fixed w-[230px] h-full left-0 top-0 bg-primary border-r border-myGray flex flex-col">
+    <aside className="fixed w-[70px] lg:w-[230px] h-full left-0 top-0 bg-primary border-r border-myGray flex flex-col">
       <div className="p-4 bg-primary border-b border-myGray/10">
         <Link href="/">
           <Image
@@ -37,15 +37,15 @@ const SideNav = () => {
       </div>
 
       <ScrollArea className="flex-1 py-4">
-        <nav className="px-3 grid gap-6">
+        <nav className="lg:px-3 grid lg:gap-6">
           {sideNavLinks.map((nav, i) => (
             <div key={i}>
               {nav.heading && (
-                <p className="text-myGray-200 text-sm pl-4 mb-2">
+                <p className="text-myGray-200 max-lg:text-[10px] max-lg:text-center whitespace-nowrap text-sm lg:pl-4 mb-2">
                   {nav.heading}
                 </p>
               )}
-              <ul className="grid gap-1">
+              <ul className="grid gap-1 max-lg:place-items-center">
                 {nav.links.map((link, index) => {
                   const iconColor =
                     hoveredLinkIndex === index || isActiveLink(link.navLink)
@@ -56,21 +56,21 @@ const SideNav = () => {
                     <li
                       key={index}
                       className={cn(
-                        "p-3 text-myGray-100 group rounded-lg transition-all duration-200 flex items-center gap-3 hover:bg-primary-100 hover:text-primary-200",
+                        "p-3 max-lg:w-fit text-myGray-100 group rounded-lg transition-all duration-200 flex items-center gap-3 hover:bg-primary-100 hover:text-primary-200",
                         isActiveLink(link.navLink) &&
                           "bg-primary-100 text-primary-200 font-satoMd"
                       )}
                       onMouseEnter={() => setHoveredLinkIndex(index)}
                       onMouseLeave={() => setHoveredLinkIndex(null)}
                     >
-                      <Link href={link.navLink} className="flex gap-3 w-full">
+                      <Link href={link.navLink} className="flex max-lg:items-center max-lg:justify-center gap-3 w-full">
                         {link.icon &&
                           React.cloneElement(link.icon, {
                             size: 20,
                             color: iconColor,
                             className: "transition-colors duration-200",
                           })}
-                        <span>{link.navTitle}</span>
+                        <span className="max-lg:hidden">{link.navTitle}</span>
                       </Link>
                     </li>
                   );
@@ -83,18 +83,18 @@ const SideNav = () => {
 
       <Separator />
 
-      <div className="p-4 bg-primary">
-        <button className="w-full myFlex gap-3 text-white font-satoMd">
+      <div className=" py-4 px-2 lg:p-4 bg-primary">
+        <button className="w-full myFlex max-lg:justify-center lg:gap-3 text-white font-satoMd">
           <Image
             src="/icons/logout.svg"
             alt="logout icon"
             width={18}
             height={18}
           />
-          <span>Logout</span>
+          <span className="max-lg:hidden">Logout</span>
         </button>
         <div className="mt-6">
-          <p className="text-myGray-200 text-sm mb-2">POWERED BY</p>
+          <p className="text-myGray-200 max-lg:text-[10px] text-sm mb-2">POWERED BY</p>
           <Image
             src="/logos/cardInfra-logo.svg"
             alt="cardInfra Logo"

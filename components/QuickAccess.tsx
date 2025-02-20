@@ -7,7 +7,7 @@ const QuickAccess = () => {
   return (
     <section className="bg-white my-7 border border-myGray-500 px-5 pb-3 pt-5 rounded-[10px]">
       <p className="text-myBlack font-satoMd text-lg mb-3">Your Quick Access</p>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
         {QuickAccessLink.map((link, i) => (
           <Link
             key={i}

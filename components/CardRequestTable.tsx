@@ -19,7 +19,7 @@ const CardRequestsTable = () => {
   return (
     <div className="w-full bg-white p-3 flex-grow rounded-[10px] border border-myGray-500">
       <h4 className="mb-6">Recent Card Requests</h4>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto no-scrollbar">
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-primary-500 border border-myGray-500 text-center font-normal font-satoMd text-[#0000008F]">

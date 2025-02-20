@@ -44,7 +44,7 @@
   }
 
   .pageContainer {
-    @apply bg-primary-50 min-h-dvh ml-[230px] mt-[48px] px-7 py-3;
+    @apply bg-primary-50 min-h-dvh ml-[70px] lg:ml-[230px] mt-[48px] px-7 py-3;
   }
 
   .btn {

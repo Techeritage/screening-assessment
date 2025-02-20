@@ -42,7 +42,7 @@ const Header = () => {
   }
 
   return (
-    <div className="fixed top-0 right-0 h-[48px] z-50 left-[230px] flex items-center px-5 bg-white justify-between border-b border-myGray">
+    <div className="fixed top-0 right-0 h-[48px] z-50 left-[70px] lg:left-[230px] flex items-center px-5 bg-white justify-between border-b border-myGray">
       <div className="flex items-center gap-3">
         {isDynamicRoute && (
           <button

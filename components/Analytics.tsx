@@ -8,7 +8,7 @@ const Analytics = () => {
         <h4>Analytics</h4>
         <div className="bg-myGray-100 h-[0.38px] w-full" />
       </div>
-      <div className="grid grid-cols-4 gap-2 mt-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 mt-5">
         {AnalyticsStat.map((stat, i) => (
           <AnalyticsCard key={i} stat={stat} />
         ))}

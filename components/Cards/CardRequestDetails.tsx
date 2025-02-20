@@ -201,7 +201,7 @@ const CardRequestDetails = ({ data }: { data: CardRequestsProps }) => {
       </div>
       <div className="py-5">
         <p className="text-[#344054] font-satoBold">Actions</p>
-        <div className="mt-3 flex gap-5">
+        <div className="mt-3 flex flex-wrap gap-5">
           {actionBtn.map((btn, i) => (
             <button
               key={i}

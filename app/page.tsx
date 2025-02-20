@@ -8,10 +8,10 @@ const DashboardPage = () => {
     <main className="pageContainer !pb-20">
       <section className="flex justify-between">
         <div>
-          <h4 className="text-myBlack">
+          <h4 className="text-myBlack max-lg:max-w-[80%]">
             Hi Emmanuel, what would you like to do today?
           </h4>
-          <p className="text-myBlack">
+          <p className="text-myBlack max-lg:mt-2">
             <span className="font-satoMd">Last login:</span> 26/11/2024 14:39:58
           </p>
         </div>
