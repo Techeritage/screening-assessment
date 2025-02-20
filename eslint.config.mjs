@@ -15,12 +15,13 @@ const eslintConfig = [
   {
     rules: {
       "@typescript-eslint/no-unused-vars": [
-        "warn", // or "off" to completely disable the rule
+        "warn",
         {
           "argsIgnorePattern": "^_",
           "varsIgnorePattern": "^_",
         },
       ],
+      "@typescript-eslint/no-explicit-any": "off",
     },
   },
 ];
