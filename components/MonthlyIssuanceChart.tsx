@@ -1,8 +1,11 @@
 "use client";
 
-import ReactECharts from "echarts-for-react";
+import * as echarts from "echarts";
+import { useEffect, useRef } from "react";
 
 const MonthlyIssuanceChart = () => {
+  const chartRef = useRef<HTMLDivElement>(null);
+
   const legendData = [
     { name: "Personalized", color: "#014DAF" },
     { name: "Instant", color: "#CCE2FF" },
@@ -11,9 +14,7 @@ const MonthlyIssuanceChart = () => {
   const option = {
     tooltip: {
       trigger: "axis",
-      axisPointer: {
-        type: "shadow",
-      },
+      axisPointer: { type: "shadow" },
     },
     grid: {
       left: "3%",
@@ -38,9 +39,7 @@ const MonthlyIssuanceChart = () => {
         stack: "total",
         data: [10, 20, 8, 7, 12, 18, 8],
         color: "#014DAF",
-        itemStyle: {
-          borderRadius: [4, 4, 0, 0],
-        },
+        itemStyle: { borderRadius: [4, 4, 0, 0] },
       },
       {
         name: "Instant",
@@ -48,22 +47,33 @@ const MonthlyIssuanceChart = () => {
         stack: "total",
         data: [40, 50, 22, 50, 35, 60, 65],
         color: "#CCE2FF",
-        itemStyle: {
-          borderRadius: [8, 8, 0, 0],
-        },
+        itemStyle: { borderRadius: [8, 8, 0, 0] },
       },
     ],
   };
+
+  useEffect(() => {
+    if (chartRef.current) {
+      const chartInstance = echarts.init(chartRef.current);
+      chartInstance.setOption(option);
+
+      const handleResize = () => chartInstance.resize();
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+        chartInstance.dispose();
+      };
+    }
+  }, [option]);
 
   return (
     <div className="w-full bg-white flex pt-3 flex-col justify-between rounded-[10px] border border-myGray-500">
       <div>
         <h4 className="px-3">Monthly Issuance</h4>
-        <ReactECharts
-          option={option}
-          style={{ height: "400px", width: "100%" }}
-        />
+        <div ref={chartRef} style={{ height: "400px", width: "100%" }} />
       </div>
+
       <div className="flex flex-wrap justify-center gap-6 py-4 border-t border-t-myGray-500">
         {legendData.map((item) => (
           <div key={item.name} className="flex items-center gap-2">

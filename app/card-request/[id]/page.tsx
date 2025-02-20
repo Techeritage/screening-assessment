@@ -5,10 +5,11 @@ import { CardRequestsProps } from "@/types";
 const CardRequestDetailsPage = async ({
   params,
 }: {
-  params: { id: number };
+  params: Promise<{ id: number }>;
 }) => {
   const { id } = await params;
   const requestData = cardRequests.find((card) => card.id === Number(id));
+  
   return (
     <main className="pageContainer !pb-20">
       <section className="pb-3">

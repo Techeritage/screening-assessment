@@ -12,6 +12,7 @@ import {
   Profile,
   ArchiveBook,
   DocumentText1,
+  Buildings,
 } from "iconsax-react";
 
 export const sideNavLinks = [
@@ -24,7 +25,7 @@ export const sideNavLinks = [
       {
         navTitle: "Branches",
         navLink: "/branches",
-        icon: <Map1 />,
+        icon: <Buildings />,
       },
       {
         navTitle: "Roles",

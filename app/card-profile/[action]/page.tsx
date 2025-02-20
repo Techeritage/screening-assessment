@@ -3,7 +3,7 @@ import CreateProfileForm from "@/components/CreateProfileForm";
 const CardProfileActionPage = async ({
   params,
 }: {
-  params: { action: string };
+  params: Promise<{ action: string }>;
 }) => {
   const { action } = await params;
   return (
