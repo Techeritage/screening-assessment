@@ -1,20 +1,18 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { CardRequestsProps } from "@/types";
+import {
+  ActionButton,
+  ActionStatusType,
+  CardRequestsProps,
+  DisplayStatusType,
+} from "@/types";
 import Image from "next/image";
 import { useState } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent } from "@/components/ui/dialog";
 import { getStatusColor } from "@/constants";
-
-// Define a union type for status
-type StatusType =
-  | "Pending"
-  | "Ready"
-  | "In Progress"
-  | "Acknowledged"
-  | "DOWNLOADED"
-  | "DISPATCHED";
+import { CircleCheck } from "lucide-react";
+import { getDisplayStatus, getInitialStep } from "@/lib/helper";
 
 const DetailsView = ({
   title,
@@ -33,7 +31,9 @@ const DetailsView = ({
         type === 1 &&
           "bg-[#F5F5F7] max-w-[448px] px-3 border border-myGray-100",
         type === 3 &&
-          `${getStatusColor(value)} w-fit border py-1 px-4 rounded-full`
+          `${getStatusColor(
+            value as DisplayStatusType
+          )} w-fit border py-1 px-4 rounded-full`
       )}
     >
       {value}
@@ -48,13 +48,6 @@ export const btnColors = {
   "Send to Dispatch": "bg-[#8020E7]",
   "Mark as Acknowledged": "bg-[#014DAF]",
 } as const;
-
-type ActionButton = {
-  icon: string;
-  text: keyof typeof btnColors;
-  action: StatusType; // Use the union type here
-  showModal?: boolean;
-};
 
 export const getBtnColor = (btn: keyof typeof btnColors) => btnColors[btn];
 
@@ -98,54 +91,77 @@ const SuccessModal = ({
   message: string;
 }) => (
   <Dialog open={isOpen} onOpenChange={onClose}>
-    <DialogContent className="sm:max-w-md">
-      <div className="text-center p-6">
-        <Image
-          src="/icons/success.svg"
-          alt="success"
-          width={48}
-          height={48}
-          className="mx-auto mb-4"
-        />
-        <h3 className="text-lg font-semibold mb-2">Success!</h3>
-        <p className="text-gray-600">{message}</p>
+    <DialogContent>
+      <div className="w-[48px] h-[48px] rounded-[10px] shadow myFlex justify-center">
+        <CircleCheck color="#007129" />
       </div>
+      <div>
+        <h4 className="text-primary-400 font-normal font-satoBold">
+          Successful
+        </h4>
+        <p className="text-[#475467]">{message}</p>
+      </div>
+      <DialogClose className="w-fit rounded-[4px] font-normal focus:outline-none px-7 py-2 bg-primary-200 text-white !font-satoMd">
+        Continue
+      </DialogClose>
     </DialogContent>
   </Dialog>
 );
 
 const CardRequestDetails = ({ data }: { data: CardRequestsProps }) => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(getInitialStep(data.status));
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  const [status, setStatus] = useState<StatusType>(data.status); // Use the union type here
+  const [status, setStatus] = useState<ActionStatusType>(data.status);
+  const [isCompleted, setIsCompleted] = useState(
+    data.status === "Acknowledged"
+  );
+  const displayStatus = getDisplayStatus(status);
 
   const handleAction = async (button: ActionButton, index: number) => {
     try {
       if (button.showModal) {
         setModalMessage(
           button.text === "Download for production"
-            ? "Card request has been downloaded successfully!"
-            : "Card request has been sent to dispatch successfully!"
+            ? "Production file has been downloaded."
+            : "Card batch successfully sent to dispatch."
         );
         setShowModal(true);
-
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 300));
       }
-
-      // Update status
       setStatus(button.action);
-      setCurrentStep(index + 1);
+
+      if (button.action === "Acknowledged") {
+        setIsCompleted(true);
+        setCurrentStep(-1);
+      } else {
+        let nextStep = -1;
+        switch (button.action) {
+          case "DOWNLOADED":
+            nextStep = 1;
+            break;
+          case "In Progress":
+            nextStep = 2;
+            break;
+          case "Ready":
+            nextStep = 3;
+            break;
+          case "DISPATCHED":
+            nextStep = 4;
+            break;
+          default:
+            nextStep = -1;
+        }
+        setCurrentStep(nextStep);
+      }
     } catch (error) {
       console.error("Error handling action:", error);
     }
   };
 
   const isButtonEnabled = (index: number) => {
-    if (status === "Acknowledged") return false; // All buttons disabled after last step
-    if (status === "Pending" && index === 0) return true; // Only first button enabled initially
-    return index === currentStep; // Enable current step button
+    if (isCompleted) return false;
+    return index === currentStep;
   };
 
   return (
@@ -180,7 +196,7 @@ const CardRequestDetails = ({ data }: { data: CardRequestsProps }) => {
               type={2}
             />
           )}
-          <DetailsView title="Status" value={status} type={3} />
+          <DetailsView title="Status" value={displayStatus} type={3} />
         </div>
       </div>
       <div className="py-5">

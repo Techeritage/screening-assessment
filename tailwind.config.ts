@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        mlg: "1300px",
+      },
       colors: {
         primary: {
           DEFAULT: "#002F6C",

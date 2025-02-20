@@ -10,7 +10,7 @@ const CardRequestDetailsPage = async ({
   const { id } = await params;
   const requestData = cardRequests.find((card) => card.id === Number(id));
   return (
-    <main className="pageContainer">
+    <main className="pageContainer !pb-20">
       <section className="pb-3">
         <h4 className="text-myBlack">Request Details</h4>
         <p className="text-myBlack py-2">

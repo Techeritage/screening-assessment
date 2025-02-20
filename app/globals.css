@@ -20,7 +20,11 @@
   }
 
   th {
-    @apply font-normal
+    @apply font-normal;
+  }
+
+  label {
+    @apply text-[#344054] font-satoMd;
   }
 
   /* input {
@@ -41,6 +45,10 @@
 
   .pageContainer {
     @apply bg-primary-50 min-h-dvh ml-[230px] mt-[48px] px-7 py-3;
+  }
+
+  .btn {
+    @apply inline-flex gap-2 items-center bg-primary-200 text-white font-satoMd h-[36px] px-3 rounded-[4px];
   }
 
   .no-scrollbar::-webkit-scrollbar {

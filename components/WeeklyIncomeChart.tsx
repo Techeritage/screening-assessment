@@ -51,18 +51,10 @@ const WeeklyIncomeChart = () => {
             symbol: "none",
             lineStyle: {
               color: "#2ECC71",
-            },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "rgba(46, 204, 113, 0.3)",
-                },
-                {
-                  offset: 1,
-                  color: "rgba(46, 204, 113, 0.1)",
-                },
-              ]),
+              width: 3,
+              shadowBlur: 10,
+              shadowColor: "rgba(46, 204, 113, 0.5)",
+              shadowOffsetY: 5,
             },
           },
         ],

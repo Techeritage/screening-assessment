@@ -17,21 +17,21 @@ const AnalyticsCard = ({ stat }: { stat: StatProps }) => {
       </div>
 
       <div className="myFlex justify-between">
-        <h2 className="text-myBlack">{stat.statValue}</h2>
+        <h2 className="text-myBlack max-mlg:text-2xl">{stat.statValue}</h2>
         <div>
           {stat.statPercent && (
-            <div className="myFlex gap-2">
-              <div className="bg-[#EFFAF6] text-sm text-[#29A174] pl-1 pr-2 w-fit font-satoMd myFlex gap-1 rounded-[4px]">
-                <MoveUpRight size={16} />
+            <div className="myFlex gap-1">
+              <div className="bg-[#EFFAF6] text-xs text-[#29A174] pl-1 pr-2 w-fit font-satoMd myFlex gap-1 rounded-[4px]">
+                <MoveUpRight size={16} className="max-mlg:size-3" />
                 {stat.statPercent}
               </div>
-              <p className="text-[#0000008F] text-sm">this month</p>
+              <p className="text-[#0000008F] text-xs">this month</p>
             </div>
           )}
           {stat.status && (
             <div className="myFlex gap-2 text-[#E78020]">
               <CircleAlert size={16} />
-              <p className="text-sm">{stat.status}</p>
+              <p className="text-xs">{stat.status}</p>
             </div>
           )}
         </div>

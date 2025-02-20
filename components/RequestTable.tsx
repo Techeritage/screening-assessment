@@ -1,11 +1,10 @@
-import React from "react";
 import { Badge } from "./ui/badge";
 import Link from "next/link";
 import { cardRequests, getStatusColor, statusColors } from "@/constants";
 
 const RequestTable = () => {
   return (
-    <div className="overflow-x-auto rounded-[4px] border border-[#EAECF0]">
+    <section className="overflow-x-auto rounded-[4px] border border-[#EAECF0]">
       <table className="w-full border-collapse rounded-[4px] overflow-hidden">
         <thead>
           <tr className="bg-[#F9FAFB] border-b border-[#EAECF0] text-center font-normal font-satoMd text-[#475467]">
@@ -62,7 +61,7 @@ const RequestTable = () => {
           ))}
         </tbody>
       </table>
-    </div>
+    </section>
   );
 };
 

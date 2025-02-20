@@ -108,6 +108,49 @@ export const cardRequests = [
   },
 ];
 
+export const cardProfile = [
+  {
+    id: 1,
+    cardName: "Verve-1",
+    currency: "NGN",
+    expiration: "40 months",
+    binPrefix: "50611234",
+    dataCreated: "11/10/2024  23:21:03",
+  },
+  {
+    id: 2,
+    cardName: "Verve-1",
+    currency: "NGN",
+    expiration: "40 months",
+    binPrefix: "50611234",
+    dataCreated: "11/10/2024  23:21:03",
+  },
+  {
+    id: 3,
+    cardName: "Verve-1",
+    currency: "NGN",
+    expiration: "40 months",
+    binPrefix: "50611234",
+    dataCreated: "11/10/2024  23:21:03",
+  },
+  {
+    id: 4,
+    cardName: "Verve-1",
+    currency: "NGN",
+    expiration: "40 months",
+    binPrefix: "50611234",
+    dataCreated: "11/10/2024  23:21:03",
+  },
+  {
+    id: 5,
+    cardName: "Verve-1",
+    currency: "NGN",
+    expiration: "40 months",
+    binPrefix: "50611234",
+    dataCreated: "11/10/2024  23:21:03",
+  },
+];
+
 export const statusColors = {
   Ready: "bg-[#ECFDF3] text-[#067647] border-[#ABEFC6]",
   "In Progress": "bg-[#FFFAEB] text-[#B54708] border-[#FEDF89]",

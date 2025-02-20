@@ -21,7 +21,7 @@ export const sideNavLinks = [
       },
       {
         navTitle: "Card Profile",
-        navLink: "card-profile",
+        navLink: "/card-profile",
         icon: "/icons/card-profile.svg",
       },
       {

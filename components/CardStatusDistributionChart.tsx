@@ -73,7 +73,7 @@ const CardStatusChart = () => {
     <div className="relative w-full bg-white flex p-3 flex-col justify-between rounded-[10px] border border-myGray-500">
       <h4 className="mb-6">Card Status Distribution</h4>
       <div className="relative">
-        <div ref={chartRef} className="w-full h-[400px]" />
+        <div ref={chartRef} className="w-full h-[400px] z-10" />
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-base text-gray-500">Total Cards</span>
           <span className="text-5xl font-semibold mt-1">2,450</span>
