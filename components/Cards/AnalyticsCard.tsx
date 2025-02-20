@@ -1,9 +1,18 @@
+"use client";
+
 import { StatProps } from "@/types";
 import { CircleAlert, MoveUpRight } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import CountUp from "react-countup";
 
 const AnalyticsCard = ({ stat }: { stat: StatProps }) => {
+
+  const isMillion = stat.statValue.includes("M");
+  const numericValue = isMillion
+    ? parseFloat(stat.statValue.replace(/[^0-9.]/g, "")) * 1_000_000
+    : parseFloat(stat.statValue.replace(/[^0-9.]/g, ""));
+
   return (
     <div className="bg-white h-[140px] p-3 flex flex-col justify-between rounded-[10px] border border-myGray-500">
       <div>
@@ -17,7 +26,23 @@ const AnalyticsCard = ({ stat }: { stat: StatProps }) => {
       </div>
 
       <div className="myFlex justify-between">
-        <h2 className="text-myBlack max-mlg:text-2xl">{stat.statValue}</h2>
+        <h2 className="text-myBlack max-mlg:text-2xl">
+          {isNaN(numericValue) ? (
+            stat.statValue
+          ) : (
+            <CountUp
+              start={0}
+              end={numericValue}
+              duration={2}
+              separator=","
+              decimals={isMillion ? 1 : 0}
+              formattingFn={(value) =>
+                isMillion ? `₦${(value / 1_000_000).toFixed(1)}M` : `${value}`
+              }
+            />
+          )}
+        </h2>
+
         <div>
           {stat.statPercent && (
             <div className="myFlex gap-1">
