@@ -6,6 +6,7 @@ import { sideNavLinks } from "@/constants/SideNavLinks";
 import { ChevronRight, ChevronLeft, Bell, User } from "lucide-react";
 import React from "react";
 import { Home2, SearchNormal1 } from "iconsax-react";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const pathname = usePathname();
@@ -66,7 +67,7 @@ const Header = () => {
             <div className="flex items-center gap-3">
               <Link
                 href={baseRoute.navLink}
-                className="text-[#001735] font-satoMd hover:text-gray-800"
+                className={cn("text-[#001735] font-satoMd hover:text-gray-800", isDynamicRoute && "text-[#475467]")}
               >
                 {baseRoute.navTitle}
               </Link>
@@ -74,7 +75,7 @@ const Header = () => {
               {isDynamicRoute && dynamicNavTitle && (
                 <>
                   <ChevronRight className="w-5 h-5 text-myGray-300" />
-                  <span className="font-satoBold text-[#475467]">
+                  <span className="font-satoBold text-[#001735]">
                     {dynamicNavTitle}
                   </span>
                 </>

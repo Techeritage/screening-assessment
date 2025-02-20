@@ -5,7 +5,7 @@ import Analytics2 from "@/components/Analytics2";
 
 const DashboardPage = () => {
   return (
-    <main className="pageContainer">
+    <main className="pageContainer !pb-20">
       <section className="flex justify-between">
         <div>
           <h4 className="text-myBlack">
