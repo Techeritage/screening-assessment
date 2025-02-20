@@ -11,6 +11,7 @@ import React, { useState } from "react";
 
 const SideNav = () => {
   const pathName = usePathname();
+  const [hoveredLinkIndex, setHoveredLinkIndex] = useState<number | null>(null);
 
   const isActiveLink = (navUrl: string) => {
     if (navUrl === "/" && pathName === "/") {
@@ -19,7 +20,6 @@ const SideNav = () => {
     if (navUrl !== "/") {
       return pathName.startsWith(navUrl);
     }
-
     return false;
   };
 
@@ -46,23 +46,22 @@ const SideNav = () => {
                 </p>
               )}
               <ul className="grid gap-1">
-                {nav.links.map((link, i) => {
-                  const [isHovered, setIsHovered] = useState(false);
-                  const iconColor = isHovered
-                    ? "#014DAF"
-                    : isActiveLink(link.navLink)
-                    ? "#014DAF"
-                    : "#D0D5DD";
+                {nav.links.map((link, index) => {
+                  const iconColor =
+                    hoveredLinkIndex === index || isActiveLink(link.navLink)
+                      ? "#014DAF"
+                      : "#D0D5DD";
+
                   return (
                     <li
-                      key={i}
+                      key={index}
                       className={cn(
                         "p-3 text-myGray-100 group rounded-lg transition-all duration-200 flex items-center gap-3 hover:bg-primary-100 hover:text-primary-200",
                         isActiveLink(link.navLink) &&
                           "bg-primary-100 text-primary-200 font-satoMd"
                       )}
-                      onMouseEnter={() => setIsHovered(true)}
-                      onMouseLeave={() => setIsHovered(false)}
+                      onMouseEnter={() => setHoveredLinkIndex(index)}
+                      onMouseLeave={() => setHoveredLinkIndex(null)}
                     >
                       <Link href={link.navLink} className="flex gap-3 w-full">
                         {link.icon &&

@@ -1,3 +1,4 @@
+// eslint.config.js
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
@@ -11,6 +12,17 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "warn", // or "off" to completely disable the rule
+        {
+          "argsIgnorePattern": "^_",
+          "varsIgnorePattern": "^_",
+        },
+      ],
+    },
+  },
 ];
 
 export default eslintConfig;
